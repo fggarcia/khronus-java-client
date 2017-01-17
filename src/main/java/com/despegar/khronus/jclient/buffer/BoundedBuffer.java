@@ -75,7 +75,8 @@ public class BoundedBuffer implements Buffer {
                 try {
                     if (!measures.isEmpty()){
                         LOG.debug("Sending metrics to Khronus...");
-                        Collection<Measure> copiedMeasures = new ArrayList<Measure>();
+                        // Initialize array list with approximate size to minimize list growing many times
+                        Collection<Measure> copiedMeasures = new ArrayList<Measure>(measures.size());
                         measures.drainTo(copiedMeasures);
                         overflow.set(false);
     
@@ -95,10 +96,14 @@ public class BoundedBuffer implements Buffer {
 
     /**
      * Shutdown gracefully thread pool executor and sender
+     * Metrics recorded while and after shutting down while not be sent
      */
     public void shutdown() {
-        if (! executor.isShutdown() )
+        if (! executor.isShutdown() ) {
             executor.shutdown();
+            // Send metrics still in the buffer, in case there are any
+            send();
+        }
         sender.shutdown();
     }
 }
