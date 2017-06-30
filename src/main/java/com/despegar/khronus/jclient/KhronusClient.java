@@ -48,6 +48,10 @@ public class KhronusClient {
          */
         String applicationName;
         /**
+         * Khronus endpoint;
+         */
+        String endpoint = "khronus/metrics";
+        /**
          * Act like a dummy and do nothing
          */
         boolean dummy = false;
@@ -57,6 +61,14 @@ public class KhronusClient {
          */
         public Builder withHosts(String hosts) {
             this.hosts = hosts.split(",");
+            return this;
+        }
+
+        /**
+         * @param endpoint khronus endpoint
+         */
+        public Builder withEndpoint(String endpoint){
+            this.endpoint = endpoint;
             return this;
         }
 
@@ -133,7 +145,7 @@ public class KhronusClient {
 	    this.buffer = new BoundedBuffer(new KhronusConfig(
 		    builder.applicationName, builder.maximumMeasures,
 		    builder.sendIntervalMillis, builder.hosts,
-		    builder.maxConnections));
+		    builder.endpoint, builder.maxConnections));
 	}
     }
 

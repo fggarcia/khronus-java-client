@@ -6,11 +6,13 @@ public class KhronusConfig {
     private String[] hosts;
     private int maxConnections;
     private String applicationName;
+    private String endpoint;
 
-    public KhronusConfig(String applicationName, Integer maximumMeasures, Long sendIntervalMillis, String[] hosts, Integer maxConnections) {
+    public KhronusConfig(String applicationName, Integer maximumMeasures, Long sendIntervalMillis, String[] hosts, String endpoint, Integer maxConnections) {
         this.maximumMeasures = maximumMeasures;
         this.sendIntervalMillis = sendIntervalMillis;
         this.hosts = hosts;
+        this.endpoint = endpoint;
         this.maxConnections = maxConnections;
         this.applicationName = applicationName;
     }
@@ -55,4 +57,11 @@ public class KhronusConfig {
         this.applicationName = applicationName;
     }
 
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
+    }
+
+    public String getEndpoint() {
+        return endpoint;
+    }
 }

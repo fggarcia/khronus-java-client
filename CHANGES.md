@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.5 - 0.0.6 (2017-06-30)
+* Add khronus endpoint configuration
+
 ## 0.0.4 - 0.0.5 (2015-11-16)
 
 * Add dummy mode 

@@ -27,6 +27,7 @@ public class Sender {
     private static final int connectTimeout = 1000;
 
     private final String[] hosts;
+    private final String endpoint;
     private final CloseableHttpClient httpClient;
     private final EntityBuilder entityBuilder;
     private final BasicResponseHandler responseHandler;
@@ -34,6 +35,7 @@ public class Sender {
 
     public Sender(KhronusConfig config) {
         this.hosts = config.getHosts();
+        this.endpoint = config.getEndpoint();
 
         PoolingHttpClientConnectionManager connManager = new PoolingHttpClientConnectionManager();
         connManager.setMaxTotal(config.getMaxConnections());
@@ -54,7 +56,7 @@ public class Sender {
 
     public void send(String json) {
         try {
-            HttpPost httpPost = new HttpPost(String.format("http://%s/khronus/metrics", getHost()));
+            HttpPost httpPost = new HttpPost(String.format("http://%s/%s", getHost(), endpoint));
             httpPost.setEntity(entityBuilder.setText(json).build());
             httpPost.setConfig(requestConfig);
 

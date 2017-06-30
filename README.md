@@ -11,7 +11,7 @@ It works by buffering metrics to send them later in a batch way.
 <dependency>
     <groupId>com.despegar</groupId>
     <artifactId>khronus-java-client</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 </dependency>
 ```
 
@@ -24,6 +24,7 @@ new KhronusClient.Builder()
           .withSendIntervalMillis(3000L)
           .withMaximumMeasures(500000)
           .withHosts("KhronusHost:KhronusPort")
+          .withEndoint("khronus/metrics")
           .build()
 ```
 The application name is prepend to all metrics names, to guarantee uniqueness in Khronus.
